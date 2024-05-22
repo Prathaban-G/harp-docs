@@ -32,24 +32,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
     // Get the current URL path
     const currentPath = window.location.pathname;
+    console.log(`Current Path: ${currentPath}`);
 
     // Select all sidebar links
     const sidebarLinks = document.querySelectorAll('.menu__link');
 
     // Loop through each link and compare the href with the current URL path
     sidebarLinks.forEach(link => {
+        console.log(`Checking link: ${link.href}`);
         if (link.href.includes(currentPath)) {
+            console.log(`Match found: ${link.href}`);
+
             // Remove active class from all links
             sidebarLinks.forEach(link => link.classList.remove('menu__link--active'));
 
             // Add active class to the current link
             link.classList.add('menu__link--active');
+
+            // Expand the parent submenu if necessary
+            let parentUl = link.closest('ul.menu__list');
+            if (parentUl) {
+                let parentDiv = parentUl.previousElementSibling;
+                if (parentDiv && parentDiv.classList.contains('menu__list-item-collapsible')) {
+                    parentDiv.querySelector('a').setAttribute('aria-expanded', 'true');
+                    parentUl.style.display = 'block';
+                }
+            }
         }
     });
+
+    // Collapsible sidebar sections
+    const collapsibleLinks = document.querySelectorAll('.menu__list-item-collapsible > .menu__link');
+
+    collapsibleLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const sublist = link.parentElement.nextElementSibling;
+            const isExpanded = link.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                sublist.style.display = 'none';
+                link.setAttribute('aria-expanded', 'false');
+            } else {
+                sublist.style.display = 'block';
+                link.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 });
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -96,3 +137,4 @@ window.addEventListener('scroll', function() {
     }
 });
 });
+
