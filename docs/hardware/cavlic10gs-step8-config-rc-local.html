@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en" dir="ltr"
+    class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-hardware/step8-config-rc-local"
+    data-has-hydrated="false">
+
+<!-- Mirrored from harp-docs.vercel.app/docs/hardware/step8-config-rc-local by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Mar 2024 21:35:59 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Docusaurus v3.1.1">
+    <title data-rh="true">Step 8-Create Watchdog Service| Harp Documentation</title>
+    <meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1">
+    <meta data-rh="true" name="twitter:card" content="summary_large_image">
+    <meta data-rh="true" property="og:image" content="../../img/login-page-logo.png">
+    <meta data-rh="true" name="twitter:image" content="../../img/login-page-logo.png">
+    <meta data-rh="true" property="og:url" content="step8-config-rc-local">
+    <meta data-rh="true" property="og:locale" content="en">
+    <meta data-rh="true" name="docusaurus_locale" content="en">
+    <meta data-rh="true" name="docsearch:language" content="en">
+    <meta data-rh="true" name="docusaurus_version" content="current">
+    <meta data-rh="true" name="docusaurus_tag" content="docs-default-current">
+    <meta data-rh="true" name="docsearch:version" content="current">
+    <meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current">
+    <meta data-rh="true" property="og:title" content="Step 8 - Setup rc-local | Harp Documentation">
+    <meta data-rh="true" name="description" content="This guide is only for Devices connected with SIMCOM 7600E Modem.">
+    <meta data-rh="true" property="og:description"
+        content="This guide is only for Devices connected with SIMCOM 7600E Modem.">
+    <link data-rh="true" rel="icon" href="../../img/favicon.ico">
+    <link data-rh="true" rel="canonical" href="step8-config-rc-local">
+    <link data-rh="true" rel="alternate" href="step8-config-rc-local" hreflang="en">
+    <link data-rh="true" rel="alternate" href="step8-config-rc-local" hreflang="x-default">
+    <link rel="alternate" type="application/rss+xml" href="../../blog/rss.xml" title="Harp Documentation RSS Feed">
+    <link rel="alternate" type="application/atom+xml" href="../../blog/atom.xml" title="Harp Documentation Atom Feed">
+    <link rel="stylesheet" href="../../assets/css/styles.3768ca93.css">
+    <script src="../../assets/js/runtime_main.8a1fa19d.js" defer="defer"></script>
+    <script src="../../assets/js/main.df785b98.js" defer="defer"></script>
+    <style>
+
+
+
+    </style>
+</head>
+
+<body class="navigation-with-keyboard">
+    <script>!function () { function t(t) { document.documentElement.setAttribute("data-theme", t) } var e = function () { try { return new URLSearchParams(window.location.search).get("docusaurus-theme") } catch (t) { } }() || function () { try { return localStorage.getItem("theme") } catch (t) { } }(); t(null !== e ? e : "light") }(), function () { try { const c = new URLSearchParams(window.location.search).entries(); for (var [t, e] of c) if (t.startsWith("docusaurus-data-")) { var a = t.replace("docusaurus-data-", "data-"); document.documentElement.setAttribute(a, e) } } catch (t) { } }()</script>
+    <div id="__docusaurus">
+        <div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn"
+                href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div>
+                <nav aria-label="Main" class="navbar navbar--fixed-top">
+                    <div class="navbar__inner">
+                        <div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false"
+                                class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30"
+                                    aria-hidden="true">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+                                        d="M4 7h22M4 15h22M4 23h22"></path>
+                                </svg></button><a class="navbar__brand" href="../../index.html">
+                                <div class="navbar__logo"><img src="../../img/login-page-logo.png" alt="harp-logo"
+                                        class="themedComponent_mlkZ themedComponent--light_NVdE" width="130px"><img
+                                        src="../../img/login-page-logo.png" alt="harp-logo"
+                                        class="themedComponent_mlkZ themedComponent--dark_xIcU" width="130px"></div><b
+                                    class="navbar__title text--truncate"></b>
+                            </a><a class="navbar__item navbar__link navbar__link--active" href="step1-install-os.html">Hardware</a><a
+                                class="navbar__item navbar__link " href="../software/intro.html">Software</a><a aria-current="page"
+                                class="navbar__item navbar__link " href="../deployment/intro.html">Deployment</a></div>
+                        <div class="navbar__items navbar__items--right">
+                            <div class="toggle_vylO colorModeToggle_DEke"></div>
+                            <div class="navbarSearchContainer_Bca1"></div>
+                        </div>
+                    </div>
+                    <div role="presentation" class="navbar-sidebar__backdrop"></div>
+                </nav>
+        <div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0">
+            <div class="docsWrapper_hBAB"><button aria-label="Scroll back to top"
+                    class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button>
+                <div class="docRoot_UBD9">
+                    <aside class="theme-doc-sidebar-container docSidebarContainer_YfHR">
+                        <div class="sidebarViewport_aRkj">
+                            <div class="sidebar_njMd">
+                                <nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG">
+                                    <ul class="theme-doc-sidebar-menu menu__list">
+                                        <li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item">
+                                            <div class="menu__list-item-collapsible">
+                                                <a class="menu__link menu__link--sublist menu__link--sublist-caret"
+                                                   aria-expanded="false" href="#">SIMCOM</a>
+                                            </div>
+                                            <ul class="menu__list" style="display:none;overflow:visible;height:auto">
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step1-install-os.html">Step 1 - Install OS - Rpi Lite</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step2-raspi-config.html">Step 2 - Raspi Config</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step3-install-essential.html">Step 3 - Install Dependencies</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step4-resolv-config.html">Step 4 - Configure DNS</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step5-manage-interface.html">Step 5 - Configure IP</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step6-iptables.html">Step 6 - Configure IP tables</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step7-setup-ppp-simcom.html">Step 7 - wwan on SIMCOM</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step9-setup-serial.html">Step 8 - Create Serial ID</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step10-setup-hardware-id.html">Step 9 - Create Hardware ID</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step11-setup-ota.html">Step 10 - Create OTA Folder</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step12-creating-c_ota.html">Step 11 - Create OTA Script</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step13-creating-harp-service.html">Step 12 - Create Harp Service</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step14-creating-openvpn-service.html">Step 13 - Create Openvpn Service</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="simcom-step8-config-rc-local.html">Step 14 - Create Watchdog Service</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item">
+                                            <div class="menu__list-item-collapsible">
+                                                <a class="menu__link menu__link--sublist menu__link--sublist-caret"
+                                                   aria-expanded="false" href="#">CAVLI C10GS</a>
+                                            </div>
+                                            <ul class="menu__list" style="display:none;overflow:visible;height:auto">
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step1-install-os.html">Step 1 - Install OS - Rpi Lite</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step2-raspi-config.html">Step 2 - Raspi Config</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step3-install-essential.html">Step 3 - Install Dependencies</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step4-resolv-config.html">Step 4 - Configure DNS</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step5-manage-interface.html">Step 5 - Configure IP</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step6-iptables.html">Step 6 - Configure IP tables</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step9-setup-serial.html">Step 8 - Create Serial ID</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step10-setup-hardware-id.html">Step 9 - Create Hardware ID</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step11-setup-ota.html">Step 10 - Create OTA Folder</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step12-creating-c_ota.html">Step 11 - Create OTA Script</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step13-creating-harp-service.html">Step 12 - Create Harp Service</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step14-creating-openvpn-service.html">Step 13 - Create Openvpn Service</a>
+                                                </li>
+                                                <li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item">
+                                                    <a class="menu__link" tabindex="0" href="cavlic10gs-step8-config-rc-local.html">Step 14 - Create Watchdog Service</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </aside>
+                    <main class="docMainContainer_TBSr">
+                        <div class="container padding-top--md padding-bottom--lg">
+                            <div class="row">
+                                <div class="col docItemCol_VOVn">
+                                    <div class="docItemContainer_Djhp">
+                                        <article>
+                                            <nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl"
+                                                aria-label="Breadcrumbs">
+                                                <ul class="breadcrumbs" itemscope=""
+                                                    itemtype="https://schema.org/BreadcrumbList">
+                                                    <li class="breadcrumbs__item"><a aria-label="Home page"
+                                                            class="breadcrumbs__link" href="../../index.html"><svg
+                                                                viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT">
+                                                                <path
+                                                                    d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"
+                                                                    fill="currentColor"></path>
+                                                            </svg></a></li>
+                                                    <li class="breadcrumbs__item"><span
+                                                            class="breadcrumbs__link">Hardware</span>
+                                                        <meta itemprop="position" content="1">
+                                                    </li>
+                                                    <li itemscope="" itemprop="itemListElement"
+                                                        itemtype="https://schema.org/ListItem"
+                                                        class="breadcrumbs__item breadcrumbs__item--active"><span
+                                                            class="breadcrumbs__link" itemprop="name">Step 8 - Create
+                                                            Watchdog Service</span>
+                                                        <meta itemprop="position" content="2">
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                            <div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button
+                                                    type="button" class="clean-btn tocCollapsibleButton_TO0P">On this
+                                                    page</button></div>
+                                            <div class="theme-doc-markdown markdown">
+                                                <h1>Step 8 - Create
+                                                    Watchdog Service</h1>
+                                                <div
+                                                    class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success">
+                                                    <div class="admonitionHeading_Gvgb"><span
+                                                            class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z">
+                                                                </path>
+                                                            </svg></span>Note</div>
+                                                    <div class="admonitionContent_BuS1">
+                                                        <p>This guide is only for Devices connected with CAVLI C10GS 
+                                                            Modem.</p>
+                                                    </div>
+                                                </div>
+                                                <h2 class="anchor anchorWithStickyNavbar_LWe7" id="overview">Overview:<a
+                                                        href="#overview" class="hash-link"
+                                                        aria-label="Direct link to Overview:"
+                                                        title="Direct link to Overview:">​</a></h2>
+                                                <p>This document provides instructions for creating a Ping and Reboot
+                                                    service using systemd on a Linux system. The service monitors
+                                                    network connectivity by pinging a specified IP address and initiates
+                                                    a reboot if a certain number of consecutive ping failures occur.</p>
+                                                <h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-it-is-needed">Why
+                                                    it is Needed:<a href="#why-it-is-needed" class="hash-link"
+                                                        aria-label="Direct link to Why it is Needed:"
+                                                        title="Direct link to Why it is Needed:">​</a></h2>
+                                                <p>This service is useful for maintaining network stability on embedded
+                                                    or remote systems. It automatically detects network failures and
+                                                    performs a reboot if necessary, ensuring continuous connectivity and
+                                                    system availability.</p>
+                                                <h2 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="steps-to-configure-etcrclocal">Create Watchdog Service
+                                                    <code></code>:<a href="#steps-to-configure-etcrclocal"
+                                                        class="hash-link"
+                                                        aria-label="Direct link to Create Watchdog Service"
+                                                        title="Direct link to Create Watchdog Service">​</a>
+                                                </h2>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7" id="edit-etcrclocal">
+                                                    Create watchdogs.py
+                                                    <code></code>:<a href="#edit-etcrclocal" class="hash-link"
+                                                        aria-label="Direct link to  Create watchdogs.py"
+                                                        title="Direct link to  Create watchdogs.py">​</a>
+                                                </h3>
+                                                <p>Navigate to harp Directory<code>cd /home/pi/harp</code> </p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)"></span><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)"></span><span class="token plain">cd /home/pi/harp</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                id="add-ppp-dial-up-command">Create watchdogs.py File:<a
+                                                    href="#add-ppp-dial-up-command" class="hash-link"
+                                                    aria-label="Direct link to Create watchdogs.py Script:"
+                                                    title="Direct link to Create watchdogs.py Script:">​</a></h3>
+                                            <p>Create or edit the File watchdog.py using nano:</p>
+                                            <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                <div class="codeBlockContent_biex">
+                                                    <pre tabindex="0"
+                                                        class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                        style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo </span><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)">nano </span><span class="token plain">watchdogs.py</span><br></span></code></pre>
+                                                    <div class="buttonGroup__atx"><button type="button"
+                                                            aria-label="Copy code to clipboard" title="Copy"
+                                                            class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                    class="copyButtonIcon_y97N">
+                                                                    <path fill="currentColor"
+                                                                        d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                    </path>
+                                                                </svg><svg viewBox="0 0 24 24"
+                                                                    class="copyButtonSuccessIcon_LjdS">
+                                                                    <path fill="currentColor"
+                                                                        d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                    </path>
+                                                                </svg></span></button></div>
+                                                </div>
+                                            </div>
+                                            <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                            id="copy-and-paste-the-script">Copy and Paste the Script:<a
+                                                href="#copy-and-paste-the-script" class="hash-link"
+                                                aria-label="Direct link to Copy and Paste the Script:"
+                                                title="Direct link to Copy and Paste the Script:">​</a></h3>
+                                        <p>Copy the following script and paste it into the
+                                            <code>watchdogs.py</code>
+                                            file:
+                                        </p>
+                                        <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                            style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                            <div class="codeBlockContent_biex">
+
+
+
+                                                <pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36">
+                                                    <code class="codeBlockLines_e6Vv">
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:#ff79c6">import</span> serial</span><br>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:#ff79c6">import</span> time</span><br>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:#6272a4"># Serial port configuration</span></span><br>
+<span class="token-line" style="color:#F8F8F2">serial_port <span class="token operator" style="color:#ff79c6">=</span> <span class="token string" style="color:#f1fa8c">'/dev/ttyACM0'</span></span><br>
+<span class="token-line" style="color:#F8F8F2">baud_rate <span class="token operator" style="color:#ff79c6">=</span> <span class="token number" style="color:#bd93f9">115200</span></span><br>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:#ff79c6">ser</span> <span class="token operator" style="color:#ff79c6">=</span> serial.<span class="token class-name" style="color:#8be9fd">Serial</span>(serial_port, baud_rate, timeout=<span class="token number" style="color:#bd93f9">1</span>)</span><br>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:#ff79c6">try</span><span class="token punctuation" style="color:#f8f8f2">:</span></span><br>
+<span class="token-line" style="color:#F8F8F2">    ser.write(b<span class="token string" style="color:#f1fa8c">'AT+TRB\r\n'</span>)</span><br>
+<span class="token-line" style="color:#F8F8F2">    time.<span class="token function" style="color:#50fa7b">sleep</span>(<span class="token number" style="color:#bd93f9">1</span>)</span><br>
+<span class="token-line" style="color:#F8F8F2">    response <span class="token operator" style="color:#ff79c6">=</span> ser.read_all().decode(<span class="token string" style="color:#f1fa8c">'utf-8'</span>)</span><br>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:#ff79c6">print</span>(<span class="token string" style="color:#f1fa8c">"Response from modem:"</span>)</span><br>
+<span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:#ff79c6">print</span>(response)</span><br>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:#ff79c6">finally</span><span class="token punctuation" style="color:#f8f8f2">:</span></span><br>
+<span class="token-line" style="color:#F8F8F2">    ser.close()</span><br>
+                                                    </code>
+                                                    </pre>
+
+
+                                                <div class="buttonGroup__atx"><button type="button"
+                                                        aria-label="Copy code to clipboard" title="Copy"
+                                                        class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                            aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                class="copyButtonIcon_y97N">
+                                                                <path fill="currentColor"
+                                                                    d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                </path>
+                                                            </svg><svg viewBox="0 0 24 24"
+                                                                class="copyButtonSuccessIcon_LjdS">
+                                                                <path fill="currentColor"
+                                                                    d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                </path>
+                                                            </svg></span></button></div>
+                                            </div>
+                                        </div>
+                                        <h3 class="anchor anchorWithStickyNavbar_LWe7" id="save-and-exit">Save
+                                            and Exit:<a href="#save-and-exit" class="hash-link"
+                                                aria-label="Direct link to Save and Exit:"
+                                                title="Direct link to Save and Exit:">​</a></h3>
+                                        <p>Save the changes and exit the text editor.</p>
+                                        
+
+
+
+
+
+
+
+
+
+
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7" id="edit-etcrclocal">
+                                                    Create watchdog.sh
+                                                    <code></code>:<a href="#edit-etcrclocal" class="hash-link"
+                                                        aria-label="Direct link to  Create watchdog.sh"
+                                                        title="Direct link to  Create watchdog.sh">​</a>
+                                                </h3>
+                                                <p>Navigate to pi Directory<code>cd /home/pi</code> </p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)"></span><span class="token plain">cd /home/pi</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="add-ppp-dial-up-command">Create watchdog.sh Script:<a
+                                                        href="#add-ppp-dial-up-command" class="hash-link"
+                                                        aria-label="Direct link to Create watchdog.sh Script:"
+                                                        title="Direct link to Create watchdog.sh Script:">​</a></h3>
+                                                <p>Create or edit the shell script watchdog.sh using nano:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo </span><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)">nano </span><span class="token plain">watchdog.sh</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="copy-and-paste-the-script">Copy and Paste the Script:<a
+                                                        href="#copy-and-paste-the-script" class="hash-link"
+                                                        aria-label="Direct link to Copy and Paste the Script:"
+                                                        title="Direct link to Copy and Paste the Script:">​</a></h3>
+                                                <p>Copy the following script and paste it into the
+                                                    <code>watchdog.sh</code>
+                                                    file:
+                                                </p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+
+
+
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token shebang important">#!/bin/bash</span><br></span><span class="token-line" style="color:#F8F8F2"><br></span><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">perform_ping</span>() {<br></span><span class="token-line" style="color:#F8F8F2">    ping <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-c</span> 1 8.8.8.8<br></span><span class="token-line" style="color:#F8F8F2">    return <span class="token variable" style="color:rgb(189, 147, 249);font-style:italic">$?</span><br></span><span class="token-line" style="color:#F8F8F2">}<br></span><span class="token-line" style="color:#F8F8F2"><br></span><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">send_at_command</span>() {<br></span><span class="token-line" style="color:#F8F8F2">    <span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span> /home/pi/harp/<br></span>
+<span class="token-line" style="color:#F8F8F2">    source venv/bin/activate<br></span>
+<span class="token-line" style="color:#F8F8F2">    python watchdogs.py<br></span>
+<span class="token-line" style="color:#F8F8F2">    sleep 150<br></span>
+<span class="token-line" style="color:#F8F8F2">}<br></span>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">failed_count</span>=<span class="token number" style="color:rgb(255, 121, 198)">0</span><br></span>
+<span class="token-line" style="color:#F8F8F2"><br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">while</span> <span class="token boolean" style="color:rgb(255, 184, 108)">true</span>; <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">do</span><br></span>
+<span class="token-line" style="color:#F8F8F2">    perform_ping<br></span>
+<span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">if</span> [ <span class="token variable" style="color:rgb(189, 147, 249);font-style:italic">$?</span> <span class="token operator">-ne</span> 0 ]; <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">then</span><br></span>
+<span class="token-line" style="color:#F8F8F2">        ((<span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">failed_count</span>++))<br></span>
+<span class="token-line" style="color:#F8F8F2">        logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> watchdog <span class="token string" style="color:rgb(255, 121, 198)">&quot;Ping failed - Count: ${failed_count}&quot;</span><br></span>
+<span class="token-line" style="color:#F8F8F2">        <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">if</span> [ <span class="token variable" style="color:rgb(189, 147, 249);font-style:italic">$failed_count</span> <span class="token operator">-eq</span> 90 ]; <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">then</span><br></span>
+<span class="token-line" style="color:#F8F8F2">            logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> watchdog <span class="token string" style="color:rgb(255, 121, 198)">&quot;Sending AT command before rebooting - wait 150s&quot;</span><br></span>
+<span class="token-line" style="color:#F8F8F2">            send_at_command<br></span>
+<span class="token-line" style="color:#F8F8F2">            logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> watchdog <span class="token string" style="color:rgb(255, 121, 198)">&quot;Rebooting the system due to 90 consecutive failed pings.&quot;</span><br></span>
+<span class="token-line" style="color:#F8F8F2">            sudo reboot<br></span>
+<span class="token-line" style="color:#F8F8F2">            exit 0<br></span>
+<span class="token-line" style="color:#F8F8F2">        <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">fi</span><br></span>
+<span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">else</span><br></span>
+<span class="token-line" style="color:#F8F8F2">        failed_count=0<br></span>
+<span class="token-line" style="color:#F8F8F2">        logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> ping_reboot <span class="token string" style="color:rgb(255, 121, 198)">&quot;Ping succeeded - Count reset to 0&quot;</span><br></span>
+<span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">fi</span><br></span>
+<span class="token-line" style="color:#F8F8F2">    sleep 60<br></span>
+<span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">done</span><br></span>
+                                                            </code></pre>
+
+
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7" id="save-and-exit">Save
+                                                    and Exit:<a href="#save-and-exit" class="hash-link"
+                                                        aria-label="Direct link to Save and Exit:"
+                                                        title="Direct link to Save and Exit:">​</a></h3>
+                                                <p>Save the changes and exit the text editor.</p>
+                                                
+                                                        <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="make-the-script-executable">Make the Script Executable:<a
+                                                        href="#make-the-script-executable" class="hash-link"
+                                                        aria-label="Direct link to Make the Script Executable:"
+                                                        title="Direct link to Make the Script Executable:">​</a></h3>
+                                                <p>Make the watchdog.sh script executable:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">chmod</span><span class="token plain"> +x watchdog.sh</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h2 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="steps-to-create-harpservice">Steps to Create watchdog.service:<a
+                                                        href="#steps-to-create-harpservice" class="hash-link"
+                                                        aria-label="Direct link to Steps to Create watchdog.service:"
+                                                        title="Direct link to Steps to Create watchdog.service:">​</a></h2>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="navigate-to-systemd-directory">Navigate to Systemd Directory:<a
+                                                        href="#navigate-to-systemd-directory" class="hash-link"
+                                                        aria-label="Direct link to Navigate to Systemd Directory:"
+                                                        title="Direct link to Navigate to Systemd Directory:">​</a></h3>
+                                                <p>Open a terminal and navigate to the systemd directory:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> /etc/systemd/system</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="create-harpservice-file">Create watchdog.service File:<a
+                                                        href="#create-harpservice-file" class="hash-link"
+                                                        aria-label="Direct link to Create watchdog.service File:"
+                                                        title="Direct link to Create watchdog.service File:">​</a></h3>
+                                                <p>Create a new file named watchdog.service and open it in a text editor:
+                                                </p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">nano</span><span class="token plain"> watchdog.service</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="paste-service-configuration">Paste Service Configuration:<a
+                                                        href="#paste-service-configuration" class="hash-link"
+                                                        aria-label="Direct link to Paste Service Configuration:"
+                                                        title="Direct link to Paste Service Configuration:">​</a></h3>
+                                                <p>Copy and paste the following content into the
+                                                    <code>watchdog.service</code> file:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Unit</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">Description</span><span class="token operator">=</span><span class="token plain">Watchdog Service</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">After</span><span class="token operator">=</span><span class="token plain">network.target</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Service</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">ExecStart</span><span class="token operator">=</span><span class="token plain">=/home/pi/watchdog.sh</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">Restart</span><span class="token operator">=</span><span class="token plain">always</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Install</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">WantedBy</span><span class="token operator">=</span><span class="token plain">default.target</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7" id="save-and-exit">Save
+                                                    and Exit:<a href="#save-and-exit" class="hash-link"
+                                                        aria-label="Direct link to Save and Exit:"
+                                                        title="Direct link to Save and Exit:">​</a></h3>
+                                                <p>Save the changes and exit the text editor.</p>
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="enable-harpservice-to-run-at-startup">Enable
+                                                    <code>watchdog.service</code> to Run at Startup:<a
+                                                        href="#enable-harpservice-to-run-at-startup" class="hash-link"
+                                                        aria-label="Direct link to enable-harpservice-to-run-at-startup"
+                                                        title="Direct link to enable-harpservice-to-run-at-startup">​</a>
+                                                </h3>
+                                                <p>Enable the watchdog.service to start automatically at system boot:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo</span><span class="token plain"> systemctl </span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">enable</span><span class="token plain"> watchdog</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                id="start-the-harp-service">Reload systemd :<a
+                                                    href="#start-the-harp-service" class="hash-link"
+                                                    aria-label="Direct link to Start the watchdog Service:"
+                                                    title="Direct link to Start the watchdog Service:">​</a></h3>
+                                            <p>Reload systemd to apply changes: </p>
+                                            <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                <div class="codeBlockContent_biex">
+                                                    <pre tabindex="0"
+                                                        class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                        style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo</span><span class="token plain"> systemctl daemon-reload</span><br></span></code></pre>
+                                                    <div class="buttonGroup__atx"><button type="button"
+                                                            aria-label="Copy code to clipboard" title="Copy"
+                                                            class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                    class="copyButtonIcon_y97N">
+                                                                    <path fill="currentColor"
+                                                                        d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                    </path>
+                                                                </svg><svg viewBox="0 0 24 24"
+                                                                    class="copyButtonSuccessIcon_LjdS">
+                                                                    <path fill="currentColor"
+                                                                        d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                    </path>
+                                                                </svg></span></button></div>
+                                                </div>
+                                            </div>
+
+
+
+                                                <h3 class="anchor anchorWithStickyNavbar_LWe7"
+                                                    id="start-the-harp-service">Start the watchdog Service:<a
+                                                        href="#start-the-harp-service" class="hash-link"
+                                                        aria-label="Direct link to Start the watchdog Service:"
+                                                        title="Direct link to Start the watchdog Service:">​</a></h3>
+                                                <p>Start the watchdog service to apply the changes immediately:</p>
+                                                <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
+                                                    style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
+                                                    <div class="codeBlockContent_biex">
+                                                        <pre tabindex="0"
+                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
+                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">sudo</span><span class="token plain"> systemctl start watchdog.service</span><br></span></code></pre>
+                                                        <div class="buttonGroup__atx"><button type="button"
+                                                                aria-label="Copy code to clipboard" title="Copy"
+                                                                class="clean-btn"><span class="copyButtonIcons_eSgA"
+                                                                    aria-hidden="true"><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonIcon_y97N">
+                                                                        <path fill="currentColor"
+                                                                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z">
+                                                                        </path>
+                                                                    </svg><svg viewBox="0 0 24 24"
+                                                                        class="copyButtonSuccessIcon_LjdS">
+                                                                        <path fill="currentColor"
+                                                                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z">
+                                                                        </path>
+                                                                    </svg></span></button></div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">
+                                                    Conclusion<a href="#conclusion" class="hash-link"
+                                                        aria-label="Direct link to Conclusion"
+                                                        title="Direct link to Conclusion">​</a></h2>
+                                                <p>You have successfully set up a Ping and Reboot service using systemd on your Linux system. This service continuously monitors network connectivity, initiates a reboot if a specified number of ping failures occur, and ensures the system remains operational and connected to the network.
+                                                </p>
+                                            </div>
+                                        </article>
+                                        <nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a
+                                                class="pagination-nav__link pagination-nav__link--prev"
+                                                href="cavlic10gs-step14-creating-openvpn-service.html">
+                                                <div class="pagination-nav__sublabel">Previous</div>
+                                                <div class="pagination-nav__label">step13-creating-openvpn-service</div>
+                                            </a></nav>
+                                    </div>
+                                </div>
+                                <div class="col col--3">
+                                    <div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop">
+                                        <ul class="table-of-contents table-of-contents__left-border">
+                                            <li><a href="#overview"
+                                                    class="table-of-contents__link toc-highlight">Overview:</a></li>
+                                            <li><a href="#why-it-is-needed"
+                                                    class="table-of-contents__link toc-highlight">Why it is Needed:</a>
+                                            </li>
+                                            <li><a href="#steps-to-configure-etcrclocal"
+                                                    class="table-of-contents__link toc-highlight">Steps to Create watchdog.sh Script:
+                                                 </a>
+                                                <ul>
+                                                    <li><a href="#edit-etcrclocal"
+                                                            class="table-of-contents__link toc-highlight">Navigate to Home Directory
+                                                            <code>cd /home/pi</code>:</a></li>
+                                                    <li><a href="#add-ppp-dial-up-command"
+                                                            class="table-of-contents__link toc-highlight">Create watchdog.sh Script:</a></li>
+                                                    
+                                                            <li><a href="#copy-and-paste-the-script"
+                                                                class="table-of-contents__link toc-highlight">Copy and Paste
+                                                                the Script:</a></li>
+                                                        <li><a href="#save-and-exit"
+                                                                class="table-of-contents__link toc-highlight">Save and
+                                                                Exit:</a></li>
+                                                        <li><a href="#make-the-script-executable"
+                                                                class="table-of-contents__link toc-highlight">Make the
+                                                                Script Executable:</a></li>
+                                                  
+                                                            <li><a href="#steps-to-create-harpservice"
+                                                                class="table-of-contents__link toc-highlight">Steps to Create
+                                                                watchdog.service:</a>
+                                                            <ul>
+                                                                <li><a href="#navigate-to-systemd-directory"
+                                                                        class="table-of-contents__link toc-highlight">Navigate to
+                                                                        Systemd Directory:</a></li>
+                                                                <li><a href="#create-harpservice-file"
+                                                                        class="table-of-contents__link toc-highlight">Create
+                                                                        watchdog.service File:</a></li>
+                                                                <li><a href="#paste-service-configuration"
+                                                                        class="table-of-contents__link toc-highlight">Paste Service
+                                                                        Configuration:</a></li>
+                                                                <li><a href="#save-and-exit"
+                                                                        class="table-of-contents__link toc-highlight">Save and
+                                                                        Exit:</a></li>
+                                                                <li><a href="#enable-harpservice-to-run-at-startup"
+                                                                        class="table-of-contents__link toc-highlight">Enable
+                                                                        <code>watchdog.service</code> to Run at Startup:</a></li>
+                                                                <li><a href="#start-the-harp-service"
+                                                                        class="table-of-contents__link toc-highlight">Start the watchdog
+                                                                        Service:</a></li>
+                                                            </ul>
+                                                        </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#conclusion"
+                                                    class="table-of-contents__link toc-highlight">Conclusion</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <footer class="footer footer--dark">
+            <div class="container container-fluid">
+                <div class="footer__bottom text--center">
+                    <div class="footer__copyright">Copyright © 2024 Harp Renewables. Developed by Olive IoT</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+
+<!-- Mirrored from harp-docs.vercel.app/docs/hardware/step8-config-rc-local by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Mar 2024 21:35:59 GMT -->
+
+</html>
