@@ -351,7 +351,7 @@
 <span class="token-line" style="color:#F8F8F2">        <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">fi</span><br></span>
 <span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">else</span><br></span>
 <span class="token-line" style="color:#F8F8F2">        failed_count=0<br></span>
-<span class="token-line" style="color:#F8F8F2">        logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> ping_reboot <span class="token string" style="color:rgb(255, 121, 198)">&quot;Ping succeeded - Count reset to 0&quot;</span><br></span>
+<span class="token-line" style="color:#F8F8F2">        logger <span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-t</span> ping_reboot <span class="token string" style="color:rgb(255, 121, 198)">&quot;Ping successfull 0&quot;</span><br></span>
 <span class="token-line" style="color:#F8F8F2">    <span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">fi</span><br></span>
 <span class="token-line" style="color:#F8F8F2">    sleep 60<br></span>
 <span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">done</span><br></span>
@@ -481,10 +481,20 @@
                                                 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block"
                                                     style="--prism-color:#F8F8F2;--prism-background-color:#282A36">
                                                     <div class="codeBlockContent_biex">
-                                                        <pre tabindex="0"
-                                                            class="prism-code language-bash codeBlock_bY9V thin-scrollbar"
-                                                            style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Unit</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">Description</span><span class="token operator">=</span><span class="token plain">Watchdog Service</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">After</span><span class="token operator">=</span><span class="token plain">network.target</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Service</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">ExecStart</span><span class="token operator">=</span><span class="token plain">=/home/pi/watchdog.sh</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">Restart</span><span class="token operator">=</span><span class="token plain">always</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">Install</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">WantedBy</span><span class="token operator">=</span><span class="token plain">default.target</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span></code></pre>
-                                                        <div class="buttonGroup__atx"><button type="button"
+                                                        <pre>
+[Unit]
+Description=Ping and reboot service
+After=network.target
+
+[Service]
+ExecStart=/home/pi/watchdog.sh
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target
+    </pre>
+     <div class="buttonGroup__atx"><button type="button"
                                                                 aria-label="Copy code to clipboard" title="Copy"
                                                                 class="clean-btn"><span class="copyButtonIcons_eSgA"
                                                                     aria-hidden="true"><svg viewBox="0 0 24 24"
